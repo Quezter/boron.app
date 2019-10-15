@@ -1,0 +1,21 @@
+<ActionBar class="action-bar">
+    <ActionItem tap="onSave"
+                ios.systemIcon="3"
+                ios.position="right"
+                android.systemIcon="ic_menu_save"
+                android.position="actionBar"></ActionItem>
+    <Label class="action-bar-title" text="Create Task"></Label>
+</ActionBar>
+
+<ScrollView orientation="vertical">
+    <StackLayout orientation="vertical">
+        <DockLayout stretchLastChild="false">
+            <Label text="Start" dock="left" width="25%" class="lbl-highlighted"></Label>
+            <TimePicker [hour]="currentHour" [minute]="currentMinute" verticalAlignment="center"></TimePicker>
+        </DockLayout>
+        <DockLayout stretchLastChild="false">
+            <Label text="End" dock="left" width="25%" class="lbl-highlighted"></Label>
+            <TimePicker [hour]="currentHour" [minute]="currentMinute" verticalAlignment="center"></TimePicker>
+        </DockLayout>
+    </StackLayout>
+</ScrollView>

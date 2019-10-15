@@ -1,0 +1,32 @@
+<ActionBar class="action-bar">
+    <Label class="action-bar-title" text="Home"></Label>
+</ActionBar>
+
+<ScrollView orientation="vertical">
+    <RadListView class="list-group" [items]="tasks" swipeActions="true"
+                 (itemSwipeProgressStarted)="onSwipeCellStarted($event)">
+        <ng-template tkListItemTemplate let-task="item">
+            <FlexboxLayout>
+                <Label text=" {{ task.displayName }}" style="width: 34%" class="list-group-item-heading"></Label>
+                <Label text="{{ task.startTime }}" class="list-group-item-heading"
+                       style="width: 33%"></Label>
+                <Label text="{{ task.stopTime }}" class="list-group-item-heading"
+                       style="width: 33%"></Label>
+            </FlexboxLayout>
+        </ng-template>
+        <ng-template tkListViewHeader>
+            <StackLayout orientation="horizontal">
+                <Label text="Task" style="width: 34%" class="list-group-item-heading title"></Label>
+                <Label text="Start Time" class="list-group-item-heading title" style="width: 33%"></Label>
+                <Label text="End Timе" class="list-group-item-heading title" style="width: 33%"></Label>
+            </StackLayout>
+        </ng-template>
+
+        <GridLayout *tkListItemSwipeTemplate columns="*, auto">
+            <StackLayout id="delete-view" col="1" (tap)="delete($event)"
+                         class="delete-view">
+                <Image src="~/app/images/delete.png"></Image>
+            </StackLayout>
+        </GridLayout>
+    </RadListView>
+</ScrollView>
