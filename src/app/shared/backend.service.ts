@@ -45,5 +45,4 @@ export class BackendService {
     private setUser(theToken: string) {
         setString(_CURRENT_USER, theToken);
     }
-
 }
