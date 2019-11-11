@@ -17,11 +17,39 @@ components that have the btn class name.
 */
 /* GENERAL START */
 .fa {
-    font-family: "FontAwesome";
+    font-family: "FontAwesome", serif;
+}
+
+.login-page-tablet {
+    width: 60%;
 }
 
 .btn {
     font-size: 18;
+}
+
+.font-size-sm {
+    font-size: 12;
+}
+
+.font-size-sm-tablet{
+    font-size: 17;
+}
+
+.font-size-md {
+    font-size: 14;
+}
+
+.font-size-md-tablet {
+    font-size: 19;
+}
+
+.font-size-lg {
+    font-size: 16;
+}
+
+.font-size-lg-tablet {
+    font-size: 21;
 }
 /* GENERAL END */
 
@@ -60,3 +88,11 @@ components that have the btn class name.
     vertical-align: center;
     color: black;
 }
+
+/* PAGES */
+.page {
+    height: 100%;
+    vertical-align: center;
+}
+/* LOGIN PAGE */
+

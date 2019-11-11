@@ -1,30 +1,29 @@
 import { NgModule } from "@angular/core";
-import { Routes } from "@angular/router";
-import { NSEmptyOutletComponent } from "nativescript-angular";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
+import { Routes } from "@angular/router";
+
+import { LoginComponent } from "./login/login.component";
+
+export const COMPONENTS = [LoginComponent];
 
 const routes: Routes = [
     {
         path: "",
-        redirectTo: "/(homeTab:home/default//taskTab:task/default)",
+        redirectTo: "/login",
         pathMatch: "full"
     },
     {
-        path: "home",
-        component: NSEmptyOutletComponent,
-        loadChildren: () => import("~/app/home/home.module").then((m) => m.HomeModule),
-        outlet: "homeTab"
+        path: "login",
+        component: LoginComponent
     },
     {
-        path: "task",
-        component: NSEmptyOutletComponent,
-        loadChildren: () => import("~/app/task/task.module").then((m) => m.TaskModule),
-        outlet: "taskTab"
-    }
+        path: "tabs",
+        loadChildren: "~/app/tabs/tabs.module#TabsModule"
+    },
 ];
 
 @NgModule({
-    imports: [NativeScriptRouterModule.forRoot(routes)],
-    exports: [NativeScriptRouterModule]
+    imports: [NativeScriptRouterModule.forRoot(routes, { enableTracing: true })],
+    exports: [NativeScriptRouterModule],
 })
 export class AppRoutingModule { }

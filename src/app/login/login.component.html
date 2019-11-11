@@ -1,0 +1,78 @@
+<StackLayout width="100%" class="page page-login">
+    <!-- USERNAME -->
+    <StackLayout>
+        <Label class="m-b-2"
+               [ngClass]="{'font-size-md': !isTablet(), 'font-size-md-tablet': isTablet()}"
+               row="0"
+               text="Username">
+        </Label>
+
+        <TextField row="1"
+                   class=""
+                   [ngClass]="{'font-size-md': !isTablet(), 'font-size-md-tablet': isTablet(), 'input-field-error': hasUsernameErrors()}"
+                   hint="E.g. pesho"
+                   [ngModel]="user.name"
+                   (textChange)="setUsername($event)"
+                   autocorrect="false"
+                   autocapitalizationType="none"
+                   (focus)="onUsernameFocus()">
+        </TextField>
+
+        <Label *ngIf="hasUsernameErrors()"
+               class="m-t-2"
+               [ngClass]="{'font-size-md': !isTablet(), 'font-size-md-tablet': isTablet()}"
+               row="2"
+               [text]="getUsernameError()">
+        </Label>
+    </StackLayout>
+
+    <!-- PASSWORD -->
+    <StackLayout>
+        <Label class="m-b-2"
+               [ngClass]="{'font-size-md': !isTablet(), 'font-size-md-tablet': isTablet()}"
+               row="0"
+               text="Password">
+        </Label>
+
+        <TextField #password
+                   col="0"
+                   class=""
+                   [ngClass]="{'font-size-md': !isTablet(), 'font-size-md-tablet': isTablet(), 'input-field-error': hasPasswordErrors()}"
+                   hint="Password"
+                   secure="true"
+                   [(ngModel)]="user.password" (focus)="onPasswordFocus()">
+        </TextField>
+
+        <Label *ngIf="hasPasswordErrors()"
+               class="m-t-2"
+               [ngClass]="{'font-size-md': !isTablet(), 'font-size-md-tablet': isTablet()}"
+               row="2"
+               [text]="getPasswordError()">
+        </Label>
+
+        <Label col="1"
+               [text]="showHideIcon"
+               class="fa font-size-lg"
+               (tap)="showHidePassword()"
+               verticalAlignment="middle">
+        </Label>
+    </StackLayout>
+
+    <!-- CTA BUTTONS -->
+    <StackLayout>
+        <Button row="0"
+                [isEnabled]="isSubmitEnabled()"
+                class="eloha-font-semibold login-submit font-size-lg"
+                text="Sign in"(tap)="login()">
+        </Button>
+
+        <Label *ngIf="hasLoginErrors()"
+               class="eloha-font-semibold color-danger"
+               [ngClass]="{'font-size-md': !isTablet(), 'font-size-md-tablet': isTablet()}"
+               row="1"
+               [text]="getLoginError()"
+               textWrap="true">
+        </Label>
+    </StackLayout>
+</StackLayout>
+

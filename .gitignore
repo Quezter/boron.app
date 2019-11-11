@@ -1,3 +1,6 @@
+# Application Configs
+src/app/shared/config.*
+
 # NativeScript
 hooks/
 node_modules/
