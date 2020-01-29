@@ -5,7 +5,8 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { TaskComponent } from "./task.component";
 
 const routes: Routes = [
-    { path: "default", component: TaskComponent }
+    { path: "", redirectTo: "task" },
+    { path: "task", component: TaskComponent }
 ];
 
 @NgModule({

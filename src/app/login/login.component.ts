@@ -19,20 +19,24 @@ export class LoginComponent {
     @ViewChild('name', {static: false}) textField: ElementRef;
     @ViewChild('password', {static: false}) passwordField: ElementRef;
 
-    private user: User;
-    private isLoggingIn = true;
+    private readonly user: User;
+
+    // Error holders
     private usernameError: string = '';
     private passwordError: string = '';
     private loginError: string = '';
 
+    // Password state properties
     private showPassword: boolean = false;
     private showIcon: string = String.fromCharCode(Number("0xf070")); // eye
     private hideIcon: string = String.fromCharCode(Number("0xf06e")); // eye-slash
     private showHideIcon: string = this.hideIcon;
+
+    // Field focus properties
     private passHasFocus: boolean;
     private usernameHasFocus: boolean;
-    private isAuthenticating: boolean;
 
+    private isAuthenticating: boolean;
 
     constructor(
         private router: Router,
@@ -46,10 +50,7 @@ export class LoginComponent {
     }
 
     public hasUsernameErrors() {
-        console.log('check for UN errors');
         const hasErrorMsg = !!this.usernameError;
-
-        console.log((hasErrorMsg ? 'has error' : 'not yet') + ' ' + JSON.stringify(this.user));
 
         if (!hasErrorMsg)
             return false;
@@ -67,7 +68,6 @@ export class LoginComponent {
     }
 
     public hasPasswordErrors() {
-        console.log('check for PASS errors');
         return !!this.passwordError;
     }
 
@@ -79,13 +79,11 @@ export class LoginComponent {
     }
 
     public onPasswordFocus() {
-        console.log('password focus');
         this.passHasFocus = true;
-        this.updateErrors(false);
+        this.updateErrors(true);
     }
 
     public onUsernameFocus() {
-        console.log('username focus');
         this.usernameHasFocus = true;
     }
 
@@ -148,7 +146,7 @@ export class LoginComponent {
             this.backendService.login(this.user)
                 .then(() => {
                     this.isAuthenticating = false;
-                    this.routerExtensions.navigate(["/home"], { clearHistory:true });
+                    this.routerExtensions.navigate(["tabs/default"], { clearHistory:true });
                 }).catch(error => {
                 this.isAuthenticating = false;
                 this.loginError = error.message;
@@ -158,6 +156,10 @@ export class LoginComponent {
 
     public setUsername($event) {
         this.user.name = $event.value;
+    }
+
+    public setPassword($event) {
+        this.user.password = $event.value;
     }
 
     public ngOnInit() {

@@ -40,7 +40,9 @@
                    [ngClass]="{'font-size-md': !isTablet(), 'font-size-md-tablet': isTablet(), 'input-field-error': hasPasswordErrors()}"
                    hint="Password"
                    secure="true"
-                   [(ngModel)]="user.password" (focus)="onPasswordFocus()">
+                   [(ngModel)]="user.password"
+                   (focus)="onPasswordFocus()"
+                   (textChange)="setPassword($event)">
         </TextField>
 
         <Label *ngIf="hasPasswordErrors()"
