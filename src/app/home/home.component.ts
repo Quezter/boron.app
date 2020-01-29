@@ -3,18 +3,19 @@ import { TaskItem, TaskViewModel } from "../task/task.model";
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { ListViewEventData, RadListView } from "nativescript-ui-listview";
 import { View } from "tns-core-modules/ui/core/view";
-
+import { TaskService } from "~/app/task/task.service";
 
 @Component({
     selector: "Home",
+    providers: [TaskService],
     templateUrl: "./home.component.html"
 })
 export class HomeComponent implements OnInit {
     private taskItems;
     private taskViewModel: TaskViewModel;
 
-    constructor() {
-        this.taskViewModel = new TaskViewModel();
+    constructor(private taskService: TaskService) {
+        this.taskViewModel = new TaskViewModel(taskService);
     }
 
     ngOnInit(): void {

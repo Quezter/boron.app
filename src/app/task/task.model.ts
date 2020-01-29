@@ -1,22 +1,16 @@
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { Observable } from "tns-core-modules/data/observable";
+import { TaskService } from "~/app/task/task.service";
 
 export class TaskViewModel extends Observable {
-    constructor() {
+    constructor(private taskService: TaskService) {
         super();
         this.dataItems = new ObservableArray<TaskItem>();
 
-        for (let i = 0; i < 5; i++) {
-            this.dataItems.push(
-                new TaskItem(
-                    i,
-                    "airplaneMode",
-                    "Airplane Mode",
-                    i + 1 + ":00 AM",
-                    i + 2 + ":00 AM"
-                )
-            );
-        }
+        taskService.getList().subscribe(responseData => {
+                this.dataItems.push(responseData);
+            }
+        );
     }
 
     get dataItems(): ObservableArray<TaskItem> {
@@ -28,7 +22,7 @@ export class TaskViewModel extends Observable {
     }
 }
 
-export class TaskItem {
+export class TaskItem extends Observable {
     public id: number;
     public code: string;
     public displayName: string;
@@ -42,6 +36,7 @@ export class TaskItem {
         startTime: string,
         stopTime: string
     ) {
+        super();
         this.id = id;
         this.code = code;
         this.displayName = displayName;

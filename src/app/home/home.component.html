@@ -1,6 +1,4 @@
-<ActionBar class="action-bar">
-    <Label class="action-bar-title" text="Home"></Label>
-</ActionBar>
+<ActionBar title="All Tasks" class="action-bar"></ActionBar>
 
 <ScrollView orientation="vertical">
     <RadListView class="list-group" [items]="tasks" swipeActions="true"
@@ -8,9 +6,9 @@
         <ng-template tkListItemTemplate let-task="item">
             <FlexboxLayout>
                 <Label text=" {{ task.displayName }}" style="width: 34%" class="list-group-item-heading"></Label>
-                <Label text="{{ task.startTime }}" class="list-group-item-heading"
+                <Label text="{{ task.startTime + ' h' }}" class="list-group-item-heading"
                        style="width: 33%"></Label>
-                <Label text="{{ task.stopTime }}" class="list-group-item-heading"
+                <Label text="{{ task.stopTime + ' h' }}" class="list-group-item-heading"
                        style="width: 33%"></Label>
             </FlexboxLayout>
         </ng-template>

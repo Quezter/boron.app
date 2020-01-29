@@ -1,7 +1,9 @@
+<ActionBar title="Tabs" class="action-bar"></ActionBar>
+
 <TabView androidTabsPosition="bottom">
-    <page-router-outlet *tabItem="{title: 'Home'}" name="homeTab" actionBarVisibility="never">
+    <page-router-outlet *tabItem="{title: 'All Tasks'}" name="homeTab" actionBarVisibility="auto">
     </page-router-outlet>
 
-    <page-router-outlet *tabItem="{title: 'Tasks'}" name="taskTab" actionBarVisibility="never">
+    <page-router-outlet *tabItem="{title: 'Create Tasks'}" name="taskTab" actionBarVisibility="auto">
     </page-router-outlet>
 </TabView>
