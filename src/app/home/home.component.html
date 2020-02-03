@@ -1,4 +1,10 @@
-<ActionBar title="All Tasks" class="action-bar"></ActionBar>
+<ActionBar class="action-bar">
+    <ActionItem (tap)="logOut()"
+                text="Log out"
+                ios.position="right"
+                android.position="actionBar"></ActionItem>
+    <Label class="action-bar-title" text="All Tasks"></Label>
+</ActionBar>
 
 <ScrollView orientation="vertical">
     <RadListView class="list-group" [items]="tasks" swipeActions="true"

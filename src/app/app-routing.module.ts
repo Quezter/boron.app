@@ -3,13 +3,14 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { Routes } from "@angular/router";
 
 import { LoginComponent } from "./login/login.component";
+import { AuthGuard } from "~/app/shared/auth-guard.service";
 
 export const COMPONENTS = [LoginComponent];
 
 const routes: Routes = [
     {
         path: "",
-        redirectTo: "/login",
+        redirectTo: "/tabs/default",
         pathMatch: "full"
     },
     {
@@ -18,7 +19,8 @@ const routes: Routes = [
     },
     {
         path: "tabs",
-        loadChildren: "~/app/tabs/tabs.module#TabsModule"
+        loadChildren: "~/app/tabs/tabs.module#TabsModule",
+        canActivate: [AuthGuard]
     },
 ];
 

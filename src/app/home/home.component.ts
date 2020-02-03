@@ -4,6 +4,8 @@ import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { ListViewEventData, RadListView } from "nativescript-ui-listview";
 import { View } from "tns-core-modules/ui/core/view";
 import { TaskService } from "~/app/task/task.service";
+import { remove } from "tns-core-modules/application-settings";
+import { RouterExtensions } from "nativescript-angular/router";
 
 @Component({
     selector: "Home",
@@ -14,7 +16,10 @@ export class HomeComponent implements OnInit {
     private taskItems;
     private taskViewModel: TaskViewModel;
 
-    constructor(private taskService: TaskService) {
+    constructor(
+        private taskService: TaskService,
+        private routerExtensions: RouterExtensions,
+    ) {
         this.taskViewModel = new TaskViewModel(taskService);
     }
 
@@ -33,6 +38,11 @@ export class HomeComponent implements OnInit {
         swipeLimits.right = rightItem.getMeasuredWidth();
         swipeLimits.left = 0;
         swipeLimits.threshold = rightItem.getMeasuredWidth() / 2;
+    }
+
+    logOut() {
+        remove('TOKEN');
+        this.routerExtensions.navigate(["login"], { clearHistory: true });
     }
 
     delete($event) {

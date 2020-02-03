@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
-
 import { TaskItem } from "./task.model";
 import { Config } from "../shared/config";
+import { getString } from "tns-core-modules/application-settings";
 
 @Injectable()
 export class TaskService {
@@ -12,7 +12,11 @@ export class TaskService {
 
     getList(): Observable<TaskItem[]> {
         return this.http
-            .get(Config.apiUrl + "api/tasks")
+            .get(
+                Config.apiUrl + "api/tasks",
+                {
+                    headers: this.getCommonHeaders()
+                })
             .pipe(
                 map(tasks => {
                     let taskItems = [];
@@ -32,6 +36,13 @@ export class TaskService {
                 }),
                 catchError(this.handleErrors)
             );
+    }
+
+    getCommonHeaders() {
+        return {
+            "Content-Type": "application/json",
+            "Authorization": 'Bearer ' + getString('TOKEN')
+        }
     }
 
     handleErrors(error) {

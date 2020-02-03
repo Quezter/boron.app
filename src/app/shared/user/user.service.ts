@@ -11,21 +11,13 @@ export class UserService {
     constructor(private http: HttpClient) { }
 
     login(user: User) {
-        console.log('try login');
         return this.http.post(
-            Config.apiUrl + "/login",
-            JSON.stringify({
-                username: user.name,
-                password: user.password
-            }),
-            { headers: this.getCommonHeaders() }
-        ).pipe(
-            map(response => response),
-            tap(data => {
-                Config.token = (<any>data)._kmd.authtoken
-            }),
-            catchError(this.handleErrors)
-        );
+                Config.apiUrl + "login",
+                {
+                    'username': user.name,
+                    'password': user.password
+                }
+            ).toPromise();
     }
 
     getCommonHeaders() {

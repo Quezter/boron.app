@@ -7,6 +7,7 @@ import { Page } from "tns-core-modules/ui/page";
 import { TextField } from "tns-core-modules/ui/text-field";
 import { BackendService } from "~/app/shared/backend.service";
 import { RouterExtensions } from "nativescript-angular/router";
+import { setString } from "tns-core-modules/application-settings";
 
 @Component({
     selector: "app-login",
@@ -143,14 +144,20 @@ export class LoginComponent {
             this.isAuthenticating = true;
 
             // Use the backend service to login
-            this.backendService.login(this.user)
-                .then(() => {
+            this.userService.login(this.user)
+                .then(result => {
                     this.isAuthenticating = false;
-                    this.routerExtensions.navigate(["tabs/default"], { clearHistory:true });
+                    if (result.hasOwnProperty('success') && result['success']) {
+                        setString('TOKEN', result['token']);
+                        this.routerExtensions.navigate(["tabs/default"], { clearHistory: true });
+                    } else {
+                        this.loginError = 'Login credentials doesn\'t match';
+                    }
                 }).catch(error => {
-                this.isAuthenticating = false;
-                this.loginError = error.message;
-            });
+                    console.log('from catch');
+                    this.isAuthenticating = false;
+                    this.loginError = error.message;
+                });
         }
     }
 

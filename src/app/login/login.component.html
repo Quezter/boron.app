@@ -19,7 +19,7 @@
         </TextField>
 
         <Label *ngIf="hasUsernameErrors()"
-               class="m-t-2"
+               class="error-msg m-t-2"
                [ngClass]="{'font-size-md': !isTablet(), 'font-size-md-tablet': isTablet()}"
                row="2"
                [text]="getUsernameError()">
@@ -45,19 +45,21 @@
                    (textChange)="setPassword($event)">
         </TextField>
 
+        <Label row="2"
+               [text]="showHideIcon"
+               class="fa font-size-lg"
+               (tap)="showHidePassword()"
+               verticalAlignment="middle"
+               textAlignment="right">
+        </Label>
+
         <Label *ngIf="hasPasswordErrors()"
-               class="m-t-2"
+               class="error-msg m-t-2"
                [ngClass]="{'font-size-md': !isTablet(), 'font-size-md-tablet': isTablet()}"
                row="2"
                [text]="getPasswordError()">
         </Label>
 
-        <Label col="1"
-               [text]="showHideIcon"
-               class="fa font-size-lg"
-               (tap)="showHidePassword()"
-               verticalAlignment="middle">
-        </Label>
     </StackLayout>
 
     <!-- CTA BUTTONS -->

@@ -10,13 +10,12 @@ export class BackendService {
     private serializedUser: string;
 
     public isUserLoggedIn(): boolean {
-        return !!this.user;
+        return !!getString('TOKEN');
     }
 
     public login(user: User) {
         let that = this;
         return new Promise(function (resolve, reject) {
-
             setTimeout(() => {
                 if (user.name === user.password) {
                     that.serializedUser = JSON.stringify(user);

@@ -31,3 +31,7 @@ TextField {
 .dark TextField {
   color:  #C4AFB4;
 }
+
+.error-msg {
+  color: red;
+}
