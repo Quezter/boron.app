@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
+import { Subject, Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { TaskItem } from "./task.model";
 import { Config } from "../shared/config";
@@ -8,6 +8,9 @@ import { getString } from "tns-core-modules/application-settings";
 
 @Injectable()
 export class TaskService {
+    public taskAdded = new Subject();
+    public taskAdded2 = new Subject();
+
     constructor(private http: HttpClient) { }
 
     getList(): Observable<TaskItem[]> {
@@ -36,6 +39,16 @@ export class TaskService {
                 }),
                 catchError(this.handleErrors)
             );
+    }
+
+    create(taskData: TaskItem) {
+        return this.http
+            .post(
+                Config.apiUrl + "api/tasks",
+                taskData,
+                {
+                    headers: this.getCommonHeaders()
+                }).toPromise();
     }
 
     getCommonHeaders() {

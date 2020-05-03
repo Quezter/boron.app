@@ -6,9 +6,10 @@
     <Label class="action-bar-title" text="All Tasks"></Label>
 </ActionBar>
 
-<ScrollView orientation="vertical">
-    <RadListView class="list-group" [items]="tasks" swipeActions="true"
-                 (itemSwipeProgressStarted)="onSwipeCellStarted($event)">
+<ScrollView orientation="vertical" height="100%">
+    <RadListView pullToRefresh="true" class="list-group" [items]="tasks" swipeActions="true"
+                 (itemSwipeProgressStarted)="onSwipeCellStarted($event)"
+                 (pullToRefreshInitiated)="refresh()" height="100%">
         <ng-template tkListItemTemplate let-task="item">
             <FlexboxLayout>
                 <Label text=" {{ task.displayName }}" style="width: 34%" class="list-group-item-heading"></Label>

@@ -117,7 +117,7 @@ export class LoginComponent {
         return this.passwordError;
     }
 
-    public hasLoginErrors() {
+    public hasLoginErrors(): boolean {
         return !!this.loginError;
     }
 
@@ -125,20 +125,20 @@ export class LoginComponent {
         return this.loginError;
     }
 
-    private isValidForm() {
+    private isValidForm(): boolean {
         let isValid = !!this.usernameError || !!this.passwordError;
         return !isValid;
     }
 
-    public isSubmitEnabled() {
+    public isSubmitEnabled(): boolean {
         return !this.isAuthenticating && this.utilityService.isValidUsername(this.user.name);
     }
 
-    public isTablet() {
+    public isTablet(): boolean {
         return this.utilityService.isTablet();
     }
 
-    public login() {
+    public login(): void {
         this.updateErrors(true);
         if (this.isValidForm()) {
             this.isAuthenticating = true;

@@ -7,7 +7,8 @@ export class TaskViewModel extends Observable {
         super();
         this.dataItems = new ObservableArray<TaskItem>();
 
-        taskService.getList().subscribe(responseData => {
+        taskService.getList().subscribe(
+            responseData => {
                 this.dataItems.push(responseData);
             }
         );
@@ -19,6 +20,11 @@ export class TaskViewModel extends Observable {
 
     set dataItems(value: ObservableArray<TaskItem>) {
         this.set("_dataItems", value);
+        console.log('a')
+    }
+
+    addItem(task: TaskItem) {
+        this.dataItems.push(task);
     }
 }
 

@@ -3,11 +3,13 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 import { HomeRoutingModule } from "./home-routing.module";
 import { HomeComponent } from "./home.component";
+import { NativeScriptFormsModule} from "nativescript-angular";
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
         NativeScriptUIListViewModule,
+        NativeScriptFormsModule,
         HomeRoutingModule
     ],
     declarations: [

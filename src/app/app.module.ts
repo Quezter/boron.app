@@ -11,6 +11,7 @@ import { HttpClientModule, /* other http imports */ } from "@angular/common/http
 import { NSModuleFactoryLoader } from "nativescript-angular/router";
 
 import { enable as traceEnable, addCategories } from "tns-core-modules/trace";
+import {TaskService} from "~/app/task/task.service";
 
 traceEnable();
 
@@ -37,6 +38,7 @@ export class MyErrorHandler implements ErrorHandler {
     providers: [
         AuthGuard,
         BackendService,
+        TaskService,
         { provide: ErrorHandler, useClass: MyErrorHandler },
         { provide: NgModuleFactoryLoader, useClass: NSModuleFactoryLoader }
     ],

@@ -1,9 +1,9 @@
 <ActionBar title="Tabs" class="action-bar"></ActionBar>
 
-<TabView androidTabsPosition="bottom">
-    <page-router-outlet *tabItem="{title: 'All Tasks'}" name="homeTab" actionBarVisibility="auto">
+<TabView (loaded)="onLoaded($event)" androidTabsPosition="bottom" #tabView [selectedIndex]="tabSelectedIndex" (selectedIndexChanged)="onSelectedIndexChanged($event)">
+    <page-router-outlet *tabItem="{title: 'All Tasks'}" #homeTab name="homeTab" (tab)="changeTab($event)" actionBarVisibility="auto">
     </page-router-outlet>
 
-    <page-router-outlet *tabItem="{title: 'Create Tasks'}" name="taskTab" actionBarVisibility="auto">
+    <page-router-outlet *tabItem="{title: 'Create Tasks'}" #taskTab name="taskTab" (tab)="changeTab($event)" actionBarVisibility="auto">
     </page-router-outlet>
 </TabView>
